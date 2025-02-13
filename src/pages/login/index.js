@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { ButtomClick } from '../../components/ButtonCLick';
-import { FormLogin } from '../../components/FormLogin';
+import { Buttom } from '../../components/Button';
+import { LoginForm } from '../../components/LoginForm';
 
 
 
@@ -9,10 +9,10 @@ const Login = () => {
     return (
     <>
       <div id="login" className="container">
-        <FormLogin />
+        <LoginForm />
         <div className="segunda-div">
             <h2> Registre-se!</h2>
-            <ButtomClick />
+            <Buttom />
         </div>
         
     </div>

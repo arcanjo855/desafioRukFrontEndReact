@@ -1,11 +1,11 @@
-export const FormRegister = () => {
-    function submitDadosRegister() {
+export const RegisterForm = () => {
+    function submitRegister() {
         alert(`formulario enviado`);
       }
 
     return (
         <>
-        <form action={submitDadosRegister}> 
+        <form action={submitRegister}> 
             <div className="form-group">
                 <label>Nome</label>
                 <input type="text" id="registerName" required />

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { ButtomClick } from '../../components/ButtonCLick';
+import { Buttom } from '../../components/Button';
 
 
 const Home = () => {
@@ -10,7 +10,7 @@ const Home = () => {
         <h2>Buscar dados</h2>
         <div className="form-group">
             
-            <ButtomClick />
+            <Buttom />
         </div>
         <div >
             <p id="emailResult"> </p>
@@ -21,7 +21,7 @@ const Home = () => {
         </div>
         <div className="segunda-div">
             <h2> Sair</h2>
-            <ButtomClick />
+            <Buttom />
         </div>
         
     </div>

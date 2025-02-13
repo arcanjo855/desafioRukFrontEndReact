@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { FormRegister } from '../../components/FormRegister';
-import { ButtomClick } from '../../components/ButtonCLick';
+import { RegisterForm } from '../../components/RegisterForm';
+import { Buttom } from '../../components/Button';
 
 
 const Register = () => {
@@ -9,10 +9,10 @@ const Register = () => {
     <>
     <div id="register" className="container">
         <h2>Criar Conta</h2>
-            <FormRegister />
+            <RegisterForm />
             <div className="segunda-div">
             <h2> Ja tem uma conta?</h2>
-            <ButtomClick />
+            <Buttom />
         </div>
         
     </div>

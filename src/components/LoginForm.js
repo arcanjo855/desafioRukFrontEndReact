@@ -1,14 +1,14 @@
 
 
-export const FormLogin = () => {
-    function submitDadosLogin() {
+export const LoginForm = () => {
+    function submitLogin() {
         alert(`formulario enviado`);
       }
 
 
     return (
         <>
-        <form id="formLogin" action={submitDadosLogin}>
+        <form id="formLogin" action={submitLogin}>
             <h2>Login</h2>
                 <div className="form-group">
                     <label>Email</label>

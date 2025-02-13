@@ -1,4 +1,4 @@
-export const ButtomClick = () => {
+export const Buttom = () => {
     function HandleClick(){
         alert(`a`)
     }
