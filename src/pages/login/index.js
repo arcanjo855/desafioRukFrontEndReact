@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { Buttom } from '../../components/Button';
 import { LoginForm } from '../../components/LoginForm';
+import { ButtomRedirectRegister } from '../../components/ButtomRedirectRegister';
 
 
 
@@ -11,8 +11,8 @@ const Login = () => {
       <div id="login" className="container">
         <LoginForm />
         <div className="segunda-div">
-            <h2> Registre-se!</h2>
-            <Buttom />
+            <h2>Ainda nao tem uma conta?</h2>
+            <ButtomRedirectRegister />
         </div>
         
     </div>
@@ -21,3 +21,5 @@ const Login = () => {
 }
 
 export default Login;
+
+

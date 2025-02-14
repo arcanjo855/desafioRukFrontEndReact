@@ -1,34 +1,114 @@
-export const RegisterForm = () => {
-    function submitRegister() {
-        alert(`formulario enviado`);
-      }
+import { useState } from 'react';
 
-    return (
-        <>
-        <form action={submitRegister}> 
-            <div className="form-group">
-                <label>Nome</label>
-                <input type="text" id="registerName" required />
-              
-            </div>
-            <div className="form-group">
-                <label>Email</label>
-                <input type="email" id="registerEmail" required />
-            </div>
-            <div className="form-group">
-                <label>Senha</label>
-                <input type="password" id="registerPassword" required />
-            </div>
-            <div className="form-group">
-                <label>DDD</label>
-                <input type="number" id="registerDDD" required />
-            </div>
-            <div className="form-group">
-                <label>telefone</label>
-                <input type="number" id="registerTelefone" required />
-            </div>
-            <button type="submit">Registrar</button>
-        </form>
-        </>
-    )
-}
+export const RegisterForm = () => {
+  // Estado para armazenar os dados do formulário
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    senha: '',
+    ddd: '',
+    telephone: ''
+  });
+
+  // Estado para armazenar a lista de dados submetidos
+  const [dadosSubmetidos, setDadosSubmetidos] = useState([]);
+
+  // Função para atualizar o estado conforme o usuário digita
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  // Função para lidar com o envio do formulário
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Dados submetidos:', formData);
+
+    // Adiciona os dados à lista (opcional)
+    setDadosSubmetidos([...dadosSubmetidos, formData]);
+
+    // Limpa o formulário após o envio
+    setFormData({ nome: '', email: '', senha: '', ddd: '', telephone: ''});
+  };
+
+  return (
+    <div>
+    <h2>Criar Conta</h2>
+      <form onSubmit={handleSubmit}>
+
+      <label>
+          Nome:
+          <input
+            type="text"
+            name="nome"
+            value={formData.nome}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label>
+          Email:
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label>
+          Senha:
+          <input
+            type="password"
+            name="senha"
+            value={formData.senha}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label>
+          DDD:
+          <input
+            type="number"
+            name="ddd"
+            value={formData.ddd}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+
+        <label>
+          Telefone:
+          <input
+            type="number"
+            name="telephone"
+            value={formData.telephone}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <button type="submit">Registrar-se</button>
+      </form>
+
+      {/* Exibir dados submetidos */}
+      <div>
+        <h3>Dados Enviados:</h3>
+        <ul>
+          {dadosSubmetidos.map((dado, index) => (
+            <li key={index}>
+                {dado.nome} <br /> {dado.email} <br /> {dado.senha} <br /> {dado.ddd} <br /> {dado.telephone} 
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
