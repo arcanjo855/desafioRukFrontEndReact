@@ -1,23 +1,34 @@
 import { useState } from "react";
 import axios from "axios";
 
+
+
 export const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:3000/login", { email, password });
-      console.log("Usuário adicionado:", response.data);
+      console.log("Usuário adicionado");
       const token = response.data.token;
-      console.log(token)
+      localStorage.setItem("token", token)
+      window.location.href = "/home";
+  
     } catch (error) {
       console.error("Erro ao fazer login");
     }
-  };
+    
+    
+  };   
+  
+   
 
+
+  
   return (
     <form onSubmit={handleSubmit}>
       <label>Email</label>
