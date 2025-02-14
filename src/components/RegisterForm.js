@@ -1,114 +1,38 @@
-import { useState } from 'react';
+import { useState } from "react";
+import axios from "axios";
 
-export const RegisterForm = () => {
-  // Estado para armazenar os dados do formulário
-  const [formData, setFormData] = useState({
-    nome: '',
-    email: '',
-    senha: '',
-    ddd: '',
-    telephone: ''
-  });
+export function RegisterForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setpassword] = useState("");
+  const [area_code, setAreaCode] = useState("");
+  const [number, setNumber] = useState("");
+  
 
-  // Estado para armazenar a lista de dados submetidos
-  const [dadosSubmetidos, setDadosSubmetidos] = useState([]);
-
-  // Função para atualizar o estado conforme o usuário digita
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  // Função para lidar com o envio do formulário
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Dados submetidos:', formData);
-
-    // Adiciona os dados à lista (opcional)
-    setDadosSubmetidos([...dadosSubmetidos, formData]);
-
-    // Limpa o formulário após o envio
-    setFormData({ nome: '', email: '', senha: '', ddd: '', telephone: ''});
+    try {
+      const response = await axios.post("http://localhost:3000/register", { name, email, password, number, area_code });
+      console.log("Usuário adicionado:", response.data);
+    } catch (error) {
+      console.error("Erro ao adicionar usuário");
+    }
   };
 
   return (
-    <div>
-    <h2>Criar Conta</h2>
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <label>Nome</label>
+        <input type="text" placeholder="Nome" value={name} onChange={(e) => setName(e.target.value)} />
+      <label>Email</label>
+        <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <label>Senha</label>
+        <input type="password" placeholder="Senha" value={password} onChange={(e) => setpassword(e.target.value)} />
+      <label>DDD</label>
+        <input type="number" placeholder="DDD" value={area_code} onChange={(e) => setAreaCode(e.target.value)} />
+      <label>Telefone</label>
+        <input type="number" placeholder="Telefone" value={number} onChange={(e) => setNumber(e.target.value)} />
 
-      <label>
-          Nome:
-          <input
-            type="text"
-            name="nome"
-            value={formData.nome}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label>
-          Senha:
-          <input
-            type="password"
-            name="senha"
-            value={formData.senha}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label>
-          DDD:
-          <input
-            type="number"
-            name="ddd"
-            value={formData.ddd}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-
-        <label>
-          Telefone:
-          <input
-            type="number"
-            name="telephone"
-            value={formData.telephone}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <button type="submit">Registrar-se</button>
-      </form>
-
-      {/* Exibir dados submetidos */}
-      <div>
-        <h3>Dados Enviados:</h3>
-        <ul>
-          {dadosSubmetidos.map((dado, index) => (
-            <li key={index}>
-                {dado.nome} <br /> {dado.email} <br /> {dado.senha} <br /> {dado.ddd} <br /> {dado.telephone} 
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+      <button type="submit">Fazer login</button>
+    </form>
   );
-};
+}

@@ -1,81 +1,30 @@
-import { useState } from 'react';
+import { useState } from "react";
+import axios from "axios";
 
 export const LoginForm = () => {
-  // Estado para armazenar os dados do formulário
-  const [formData, setFormData] = useState({
-    email: '',
-    senha: ''
-  });
-
-  // Estado para armazenar a lista de dados submetidos
-  const [dadosSubmetidos, setDadosSubmetidos] = useState([]);
-
-  // Função para atualizar o estado conforme o usuário digita
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  // Função para lidar com o envio do formulário
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Dados submetidos:', formData);
-
-    // Adiciona os dados à lista (opcional)
-    setDadosSubmetidos([...dadosSubmetidos, formData]);
-
-    // Limpa o formulário após o envio
-    setFormData({ email: '', senha: '' });
-  };
-
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3000/login", { email, password });
+      console.log("Usuário adicionado:", response.data);
+      const token = response.data.token;
+      console.log(token)
+    } catch (error) {
+      console.error("Erro ao fazer login");
+    }
+  };
+
   return (
-    <div>
-    <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <label>
-          Senha:
-          <input
-            type="password"
-            name="senha"
-            value={formData.senha}
-            onChange={handleChange}
-            required
-          />
-        </label>
-
-        <button type="submit">Login</button>
-      </form>
-
-      {/* Exibir dados submetidos */}
-      <div>
-        <h3>Dados Enviados:</h3>
-        <ul>
-          {dadosSubmetidos.map((dado, index) => (
-            <li key={index}>
-                {dado.email} <br></br> {dado.senha}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>Email</label>
+      <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <label>Senha</label>
+      <input type="password" placeholder="Nome" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <button type="submit">Fazer login</button>
+    </form>
   );
-};
-
+}
