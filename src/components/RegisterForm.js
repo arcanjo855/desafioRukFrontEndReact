@@ -12,15 +12,18 @@ export function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/register", { name, email, password, number, area_code });
-      console.log("Usuário adicionado:", response.data);
+      await axios.post("http://localhost:3000/register", { name, email, password, number, area_code });
+      console.log("Usuário adicionado:");
+      window.location.href = "/login";
     } catch (error) {
+      alert("Erro ao adicionar usuário")
       console.error("Erro ao adicionar usuário");
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Registro</h2>
       <label>Nome</label>
         <input type="text" placeholder="Nome" value={name} onChange={(e) => setName(e.target.value)} />
       <label>Email</label>
@@ -31,7 +34,7 @@ export function RegisterForm() {
         <input type="number" placeholder="DDD" value={area_code} onChange={(e) => setAreaCode(e.target.value)} />
       <label>Telefone</label>
         <input type="number" placeholder="Telefone" value={number} onChange={(e) => setNumber(e.target.value)} />
-
+        <br ></br><br ></br>
       <button type="submit">Fazer login</button>
     </form>
   );

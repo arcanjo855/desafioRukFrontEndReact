@@ -19,6 +19,7 @@ export const LoginForm = () => {
       window.location.href = "/home";
   
     } catch (error) {
+      alert("login ou senha incorretas")
       console.error("Erro ao fazer login");
     }
     
@@ -30,11 +31,14 @@ export const LoginForm = () => {
 
   
   return (
+    
     <form onSubmit={handleSubmit}>
+      <h2>Login</h2>
       <label>Email</label>
       <input type="email" placeholder="E-mail" value={email} onChange={(e) => setEmail(e.target.value)} />
       <label>Senha</label>
       <input type="password" placeholder="Nome" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <br ></br><br ></br>
       <button type="submit">Fazer login</button>
     </form>
   );
